@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthFunctionComponent } from './src/app/auth-function/auth-function.component';
+import { AuthFunctionComponent } from './auth-function/auth-function.component';
 
 export const routes: Routes = [
     {
