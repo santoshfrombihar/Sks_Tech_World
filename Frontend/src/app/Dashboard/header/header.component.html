@@ -1,24 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <div class="container-fluid">
         <!-- Title -->
-        <span class="navbar-brand mb-0 h1">ngx-admin</span>
+        <span class="navbar-brand mb-0 h1">Tech World</span>
         <!-- Actions -->
         <div class="d-flex align-items-center">
-            <!-- Search Icon -->
             <button class="btn btn-light me-2">
-                <i class="bi bi-search"></i>
-            </button>
-
-            <!-- Bell Icon -->
-            <button class="btn btn-light me-2">
-                <i class="bi bi-bell"></i>
+                <i class="bi bi-person-fill"></i>
             </button>
 
             <!-- User Info -->
             <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="userDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://via.placeholder.com/30" alt="User Avatar" class="rounded-circle me-2">
                     <span>Nick Jones</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -33,6 +26,11 @@
         </div>
     </div>
 </nav>
-<div class="pt-5">
+<div class="pt-5 d-flex">
     <app-sidebar></app-sidebar>
+    <div class="flex-grow-1 d-flex content-container p-3">
+        <app-classes></app-classes>
+    </div>
 </div>
+
+

@@ -1,0 +1,18 @@
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let card of cards">
+        <div class="card cards" style="width: 18rem;">
+            <img class="card-img-top" [src]="card.imgSrc" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ card.title }}</h5>
+                <p class="card-text">{{ card.content }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let item of card.listItems">{{ item }}</li>
+            </ul>
+            <div class="card-body">
+                <a [href]="card.link1" class="card-link">Card link</a>
+                <a [href]="card.link2" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+</div>
