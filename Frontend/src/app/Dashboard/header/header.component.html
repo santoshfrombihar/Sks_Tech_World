@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+    <div class="container-fluid">
+        <!-- Title -->
+        <span class="navbar-brand mb-0 h1">ngx-admin</span>
+        <!-- Actions -->
+        <div class="d-flex align-items-center">
+            <!-- Search Icon -->
+            <button class="btn btn-light me-2">
+                <i class="bi bi-search"></i>
+            </button>
+
+            <!-- Bell Icon -->
+            <button class="btn btn-light me-2">
+                <i class="bi bi-bell"></i>
+            </button>
+
+            <!-- User Info -->
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="userDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://via.placeholder.com/30" alt="User Avatar" class="rounded-circle me-2">
+                    <span>Nick Jones</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="pt-5">
+    <app-sidebar></app-sidebar>
+</div>

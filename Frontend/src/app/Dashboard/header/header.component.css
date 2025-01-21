@@ -1,0 +1,24 @@
+.navbar {
+    background-color: #563d7c; /* Replace with your preferred color */
+    color: white;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .btn-light {
+    background-color: transparent;
+    color: white;
+  }
+  
+  .btn-light:hover {
+    color: #ffc107; /* Highlight color on hover */
+  }
+  
+  .dropdown-menu {
+    min-width: 200px;
+  }
+  
+  
