@@ -4,11 +4,11 @@ import { HeaderComponent } from './Dashboard/header/header.component';
 
 export const routes: Routes = [
     {
-        path: 'login' ,
+        path: '' ,
         component: AuthFunctionComponent
     },
     {
-        path: '',
+        path: 'login',
         component: HeaderComponent
     }
 ];

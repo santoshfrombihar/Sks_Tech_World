@@ -1,12 +1,45 @@
-<form class="container">
-    <div class="form-group pt-2 col-4">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter email">
-    </div>
-    <div class="form-group pt-2 col-4">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>
+<div class="auth-container">
+    <form class="auth-form">
+        <h2 class="text-center">{{ isLogin ? 'Login' : 'Register' }}</h2>
+
+        <!-- First Name (Only for Registration) -->
+        <div class="form-group" *ngIf="!isLogin">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+        </div>
+
+        <!-- Last Name (Only for Registration) -->
+        <div class="form-group" *ngIf="!isLogin">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+
+        <!-- Confirm Password (Only for Registration) -->
+        <div class="form-group" *ngIf="!isLogin">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block">
+            {{ isLogin ? 'Login' : 'Register' }}
+        </button>
+
+        <!-- Toggle Button -->
+        <button type="button" class="btn btn-secondary btn-block" (click)="toggleLogin()">
+            {{ isLogin ? 'New User? Register' : 'Already have an account? Login' }}
+        </button>
+    </form>
+</div>
