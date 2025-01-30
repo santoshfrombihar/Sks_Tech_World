@@ -1,39 +1,44 @@
 <div class="auth-container">
-    <form class="auth-form">
+    <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
         <h2 class="text-center">{{ isLogin ? 'Login' : 'Register' }}</h2>
 
         <!-- First Name (Only for Registration) -->
         <div class="form-group" *ngIf="!isLogin">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+            <label for="firstName">First Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="First Name">
         </div>
 
         <!-- Last Name (Only for Registration) -->
         <div class="form-group" *ngIf="!isLogin">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+            <label for="lastName">Last Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
         </div>
 
         <!-- Email Address -->
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <label for="email">Email address <span class="required">*</span></label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
         </div>
 
         <!-- Password -->
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password">
+            <label for="password">Password <span class="required">*</span></label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
         </div>
 
         <!-- Confirm Password (Only for Registration) -->
         <div class="form-group" *ngIf="!isLogin">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                placeholder="Confirm Password">
         </div>
 
+        <p *ngIf="authForm.errors?.['passwordMismatch'] && !isLogin">
+            ❌ Passwords do not match!
+        </p>
+
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary btn-block">
+        <button type="submit" [disabled]="authForm.invalid && !isLogin" class="btn btn-primary btn-block">
             {{ isLogin ? 'Login' : 'Register' }}
         </button>
 
