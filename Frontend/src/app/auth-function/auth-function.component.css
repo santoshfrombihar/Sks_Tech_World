@@ -51,3 +51,15 @@ body {
     padding: 0.75rem;
     border: 1px solid #ddd;
 }
+
+.required {
+    color: red;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
