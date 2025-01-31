@@ -1,10 +1,13 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using TechWorldAPI.DTO_s.Auth;
 using TechWorldAPI.Model.AuthModel;
+using TechWorldAPI.Services.AuthService.Implementation;
 
 namespace TechWorldAPI.Controllers.AuthController
 {
@@ -12,6 +15,14 @@ namespace TechWorldAPI.Controllers.AuthController
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private IMapper _mapper;
+        private IUserService _userService;
+        public AuthController(IMapper mapper, IUserService userService)
+        {
+            _mapper = mapper;
+            _userService = userService;
+        }
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel login)
         {
@@ -38,11 +49,20 @@ namespace TechWorldAPI.Controllers.AuthController
             return Unauthorized();
         }
 
-        [HttpPost("register")]
-        public IActionResult Register([FromBody] UserModel user)
-        {
 
-            return Ok();
+
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] UserSignupDto userDto)
+        {
+            var user = _userService.SetUserModel(userDto);
+            if(user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return Conflict(new { message = "User with this email already exists." }); // HTTP 409 Conflict
+            }
         }
     }
 }

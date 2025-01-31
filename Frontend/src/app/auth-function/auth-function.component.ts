@@ -17,7 +17,7 @@ export class AuthFunctionComponent {
   isLogin: boolean = true;
   isPasswordMisMatch: boolean = false;
 
-  constructor(private authService: AuthServiceService){}
+  constructor(private authService: AuthServiceService) { }
 
   authForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -36,34 +36,30 @@ export class AuthFunctionComponent {
     const confirmPassword = form.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
- 
-  userRegistration: UserRegistration = {
-    firstName : this.authForm.value.firstName || '',
-    lastName : this.authForm.value.lastName || '',
-    email :  this.authForm.value.email || '', 
-    password : this.authForm.value.password || '',
-  }
-  userLogin : UserLogin = {
-    email :  this.authForm.value.email ?? '', 
-    password : this.authForm.value.password ?? '',
-  }
- 
+
   onSubmit() {
     if (this.authForm.invalid && !this.isLogin) {
       return;
     }
-    
+
     if (this.isLogin) {
-      this.userLogin.email = 'testuser';
-      this.userLogin.password = 'testuser';
-      console.log(this.userLogin);
-      this.authService.login(this.userLogin).subscribe(response => {
+      const userLogin: UserLogin = {
+        email: this.authForm.value.email ?? '',
+        password: this.authForm.value.password ?? ''
+      };
+      this.authService.login(userLogin).subscribe(response => {
         console.log('Login Successful:', response);
       }, error => {
         console.error('Login Failed:', error);
       });
     } else {
-      this.authService.register(this.userRegistration).subscribe(response => {
+      const userRegistration: UserRegistration = {
+        firstName: this.authForm.value.firstName || '',
+        lastName: this.authForm.value.lastName || '',
+        email: this.authForm.value.email || '',
+        password: this.authForm.value.password || '',
+      }
+      this.authService.register(userRegistration).subscribe(response => {
         console.log('Registration Successful:', response);
       }, error => {
         console.error('Registration Failed:', error);

@@ -1,10 +1,10 @@
-﻿using TechWorldAPI.Model.AuthModel;
+﻿using TechWorldAPI.DTO_s.Auth;
 
 namespace TechWorldAPI.Services.AuthService.Implementation
 {
     public interface IUserService
     {
-        public UserModel GetUserById(int id);
-        public UserModel SetUserModel(UserModel user);
+        public UserSignupDto GetUserById(int id);
+        public Task<UserSignupDto> SetUserModel(UserSignupDto user);
     }
 }
