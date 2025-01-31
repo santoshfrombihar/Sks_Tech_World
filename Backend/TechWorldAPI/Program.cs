@@ -3,7 +3,10 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using TechWorldAPI.Mappings;
 using TechWorldAPI.Model.AppDbContext;
+using TechWorldAPI.Services.AuthService.Implementation;
+using TechWorldAPI.Services.AuthService.Interfaces;
 
 namespace TechWorldAPI
 {
@@ -16,6 +19,7 @@ namespace TechWorldAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddDbContext<AppDbContext>(options =>
              options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
@@ -47,7 +51,7 @@ namespace TechWorldAPI
                               .AllowAnyHeader();
                     });
             });
-
+            builder.Services.AddScoped<IUserService, UserService>();
             var app = builder.Build();
             app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
