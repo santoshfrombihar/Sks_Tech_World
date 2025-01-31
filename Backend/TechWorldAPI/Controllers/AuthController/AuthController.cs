@@ -52,9 +52,9 @@ namespace TechWorldAPI.Controllers.AuthController
 
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] UserSignupDto userDto)
+        public async Task<IActionResult> Register([FromBody] UserSignupDto userDto)
         {
-            var user = _userService.SetUserModel(userDto);
+            var user = await _userService.SetUserModel(userDto);
             if(user != null)
             {
                 return Ok(user);

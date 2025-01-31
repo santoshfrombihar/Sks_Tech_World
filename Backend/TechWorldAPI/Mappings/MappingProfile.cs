@@ -9,6 +9,7 @@ namespace TechWorldAPI.Mappings
         public MappingProfile()
         {
             CreateMap<UserSignupDto, UserModel>();
+            CreateMap<UserModel, UserSignupDto>();
         }
     }
 }

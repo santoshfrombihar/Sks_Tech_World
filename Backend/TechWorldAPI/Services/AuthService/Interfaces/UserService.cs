@@ -1,6 +1,5 @@
-﻿using System.Data.Entity;
-using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TechWorldAPI.DTO_s.Auth;
 using TechWorldAPI.Model.AppDbContext;
 using TechWorldAPI.Model.AuthModel;
@@ -22,12 +21,12 @@ namespace TechWorldAPI.Services.AuthService.Interfaces
             throw new NotImplementedException();
         }
 
-        public async Task<UserSignupDto?> SetUserModel(UserSignupDto userDto)
+        public async Task<UserSignupDto> SetUserModel(UserSignupDto userDto)
         {
             try
             {
                 // Check if user already exists in the database (based on email)
-                var existingUser = await _appDbContext.User.FirstOrDefaultAsync(u => u.Email == userDto.Email);
+                var existingUser = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Email == userDto.Email);
                 if (existingUser != null)
                 {
                     Console.WriteLine("User with this email already exists.");
@@ -38,7 +37,7 @@ namespace TechWorldAPI.Services.AuthService.Interfaces
                 var user = _mapper.Map<UserModel>(userDto);
 
                 // Add new user to the database
-                _appDbContext.User.Add(user);
+                _appDbContext.Users.Add(user);
                 await _appDbContext.SaveChangesAsync();
 
                 // Map saved user back to DTO (if needed)

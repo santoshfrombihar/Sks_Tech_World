@@ -1,6 +1,6 @@
 /* Background with animated gradient */
 body {
-    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1) ;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
     height: 100vh;
@@ -11,9 +11,17 @@ body {
 
 /* Animation for smooth background transition */
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Centering the form */
@@ -63,3 +71,7 @@ body {
     margin-top: 5px;
 }
 
+::ng-deep .p-toast .p-toast-message .p-toast-detail {
+    color: rgb(136, 67, 67) !important; /* Set the text color to black */
+  }
+  
