@@ -8,7 +8,7 @@ export const routes: Routes = [
         component: AuthFunctionComponent
     },
     {
-        path: 'login',
+        path: 'home',
         component: HeaderComponent
     }
 ];

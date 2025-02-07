@@ -11,6 +11,6 @@ namespace TechWorldAPI.Model.AppDbContext
 
         }
 
-        public DbSet<UserModel> User { get; set; }
+        public DbSet<UserModel> Users { get; set; }
     }
 }
