@@ -26,25 +26,29 @@ namespace TechWorldAPI.Controllers.AuthController
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel login)
         {
-            if (login.Email == "testuser" && login.Password == "testuser")
+            UserSignupDto user  =  _userService.GetUserByEmail(login.Email).Result;
+            if (user != null)
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.UTF8.GetBytes("MyVerySecureAndStrongJWTKey123456!"); // Replace with your secret key
-                var tokenDescriptor = new SecurityTokenDescriptor
+                if (login.Email == user.Email && login.Password == user.Password)
                 {
-                    Subject = new ClaimsIdentity(new[]
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.UTF8.GetBytes("MyVerySecureAndStrongJWTKey123456!"); // Replace with your secret key
+                    var tokenDescriptor = new SecurityTokenDescriptor
                     {
+                        Subject = new ClaimsIdentity(new[]
+                        {
                     new Claim(ClaimTypes.Name, login.Email),
                     new Claim(ClaimTypes.Role, "Admin") // Optional: Add roles or custom claims
                 }),
-                    Expires = DateTime.UtcNow.AddHours(1),
-                    Issuer = "localhost",
-                    Audience = "postmanClient",
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
+                        Expires = DateTime.UtcNow.AddHours(1),
+                        Issuer = "localhost",
+                        Audience = "postmanClient",
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    };
 
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                return Ok(new { Token = tokenHandler.WriteToken(token) });
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                    return Ok(new { Token = tokenHandler.WriteToken(token), UserName = user.FirstName + ' ' +user.LastName, Email = user.Email});
+                }
             }
             return Unauthorized();
         }

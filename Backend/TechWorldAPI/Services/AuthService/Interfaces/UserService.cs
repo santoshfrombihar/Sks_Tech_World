@@ -16,9 +16,20 @@ namespace TechWorldAPI.Services.AuthService.Interfaces
             _appDbContext = appDbContext;
             _mapper = mapper;
         }
-        public UserSignupDto GetUserById(int id)
+
+        public async Task<UserSignupDto> GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userDetails = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+                var user = _mapper.Map<UserSignupDto>(userDetails);
+                return user;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                throw; // Rethrow for further handling
+            }
         }
 
         public async Task<UserSignupDto> SetUserModel(UserSignupDto userDto)
