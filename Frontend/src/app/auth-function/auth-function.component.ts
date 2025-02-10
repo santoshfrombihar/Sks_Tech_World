@@ -53,6 +53,7 @@ export class AuthFunctionComponent {
       };
       this.authService.login(userLogin).subscribe(response => {
         console.log('Login Successful:', response);
+        sessionStorage.setItem('authToken', response.token);
         this.redirectToHome();
       }, error => {
         this.showLoginFailed();
