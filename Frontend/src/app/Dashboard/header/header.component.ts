@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ClassesComponent } from '../classes/classes.component';
-import { TokenService } from '../../services/token.service';
+import { TokenService } from '../../services/token/token.service';
 @Component({
   selector: 'app-header',
   imports: [SidebarComponent, ClassesComponent],

@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "title": "C#",
+      "image": "/images/c-sharp.png",
+      "description": "This is a sample JSON file loaded in Angular"
+    },
+    {
+      "id": 2,
+      "title": "Java Core",
+      "image": "/images/java.png",
+      "description": "Learn advanced Angular concepts"
+    },
+    {
+      "id": 3,
+      "title": ".Net Core",
+      "image": "/images/.net.png",
+      "description": "Understand RxJS in Angular"
+    },
+    {
+        "id": 4,
+        "title": "Angular",
+        "image": "/images/angular.png",
+        "description": "Understand RxJS in Angular"
+      },
+      {
+        "id": 5,
+        "title": "JavaScript",
+        "image": "/images/js.png",
+        "description": "Understand RxJS in Angular"
+      },
+      {
+        "id": 6,
+        "title": "Node",
+        "image": "/images/nodejs.png",
+        "description": "Understand RxJS in Angular"
+      }
+  ]
+  

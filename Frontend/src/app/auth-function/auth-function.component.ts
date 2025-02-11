@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { UserRegistration } from '../Models/AuthModel/authModel';
 import { UserLogin } from '../Models/AuthModel/authModel';
-import { AuthServiceService } from '../services/auth-service.service';
+import { AuthServiceService } from '../services/auth/auth-service.service';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';

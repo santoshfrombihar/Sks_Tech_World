@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CourseService } from '../../services/course/course.service';
+import { CourseModel } from '../../Models/CourseModel/CourseModel';
 @Component({
   selector: 'app-classes',
   imports: [CommonModule],
@@ -7,12 +9,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './classes.component.css'
 })
 export class ClassesComponent {
-  cards = new Array(10).fill({ // Repeat card data for 10 cards
-    title: 'Card title',
-    content: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    link1: '#',
-    link2: '#',
-    listItems: ['Cras justo odio', 'Dapibus ac facilisis in', 'Vestibulum at eros'],
-    imgSrc: 'https://via.placeholder.com/150' // Placeholder image URL
-  });
+  courses: CourseModel[] = [];
+  constructor(private coursesService: CourseService) { }
+
+  ngOnInit() {
+    this.coursesService.getCourses().subscribe(response =>{
+      this.courses = response;
+      console.log(this.courses);
+    });
+  }
 }

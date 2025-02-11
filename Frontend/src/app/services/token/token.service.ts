@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
   getToken(): string | null {
-    return sessionStorage.getItem('authToken'); // Retrieve token from session storage
+    if (isPlatformBrowser(this.platformId)) {
+      return sessionStorage.getItem('authToken');
+    }
+    return null;
   }
 
   getDecodedToken(): any {
