@@ -38,7 +38,9 @@ namespace TechWorldAPI.Controllers.AuthController
                         Subject = new ClaimsIdentity(new[]
                         {
                     new Claim(ClaimTypes.Name, login.Email),
-                    new Claim(ClaimTypes.Role, "Admin") // Optional: Add roles or custom claims
+                    new Claim(ClaimTypes.Role, "Admin"), // Optional: Add roles or custom claims
+                    new Claim("UserName", user.FirstName + " " + user.LastName), // Custom claim for User Name
+                    new Claim("Email", user.Email) // Custom claim for Email
                 }),
                         Expires = DateTime.UtcNow.AddHours(1),
                         Issuer = "localhost",
@@ -47,7 +49,7 @@ namespace TechWorldAPI.Controllers.AuthController
                     };
 
                     var token = tokenHandler.CreateToken(tokenDescriptor);
-                    return Ok(new { Token = tokenHandler.WriteToken(token), UserName = user.FirstName + ' ' +user.LastName, Email = user.Email});
+                    return Ok(new { Token = tokenHandler.WriteToken(token) });
                 }
             }
             return Unauthorized();
