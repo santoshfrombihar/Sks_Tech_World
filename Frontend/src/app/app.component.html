@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div *ngIf="isAuthenticated; else authContent" class="d-flex">
+    <app-sidebar></app-sidebar>
+    <div class="flex-grow-1">
+        <app-header></app-header>
+        <div class="container mt-4">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<ng-template #authContent>
+    <router-outlet></router-outlet>
+</ng-template>
