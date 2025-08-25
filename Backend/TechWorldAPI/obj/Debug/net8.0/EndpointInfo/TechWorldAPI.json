@@ -45,17 +45,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/UserSignupDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/UserSignupDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/UserSignupDto"
               }
             }
           }
@@ -84,7 +84,7 @@
         },
         "additionalProperties": false
       },
-      "UserModel": {
+      "UserSignupDto": {
         "type": "object",
         "properties": {
           "id": {

@@ -3,6 +3,7 @@ import { AuthFunctionComponent } from './auth-function/auth-function.component';
 import { HeaderComponent } from './Dashboard/header/header.component';
 import { ProfileComponent } from './Dashboard/profile/profile.component';
 import { ClassesComponent } from './Dashboard/classes/classes.component';
+import { CourseContentComponent } from './Dashboard/course-content/course-content.component';
 export const routes: Routes = [
     {
         path: '',
@@ -15,5 +16,9 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent
+    },
+    {
+        path: 'coursepage',
+        component: CourseContentComponent
     }
 ];
