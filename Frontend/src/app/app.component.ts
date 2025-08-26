@@ -17,7 +17,6 @@ export class AppComponent {
   constructor(private authService: AuthServiceService,  private cdr: ChangeDetectorRef) {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       this.isAuthenticated = !!sessionStorage.getItem('authToken');
-      alert(this.isAuthenticated);
     }
   }
 

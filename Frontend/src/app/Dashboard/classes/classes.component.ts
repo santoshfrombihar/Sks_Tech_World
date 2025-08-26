@@ -16,7 +16,6 @@ export class ClassesComponent {
   ngOnInit() {
     this.coursesService.getCourses().subscribe(response =>{
       this.courses = response;
-      console.log(this.courses);
     });
   }
 }
