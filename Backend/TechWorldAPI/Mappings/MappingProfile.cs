@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using TechWorldAPI.DTO_s.Auth;
+using TechWorldAPI.DTO_s.User;
 using TechWorldAPI.Model.AuthModel;
+using TechWorldAPI.Model.UserProfileModel;
 
 namespace TechWorldAPI.Mappings
 {
@@ -10,6 +12,8 @@ namespace TechWorldAPI.Mappings
         {
             CreateMap<UserSignupDto, UserModel>();
             CreateMap<UserModel, UserSignupDto>();
+            CreateMap<UserProfile, UserProfileDto>();
+            CreateMap<UserProfileDto, UserProfile>();
         }
     }
 }

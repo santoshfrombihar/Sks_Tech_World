@@ -1,8 +1,8 @@
-﻿using TechWorldAPI.Model.AuthModel;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace TechWorldAPI.Model.UserProfileModel
+namespace TechWorldAPI.DTO_s.User
 {
-    public class UserProfile
+    public class UserProfileDto
     {
         public int Id { get; set; }
 
@@ -19,8 +19,8 @@ namespace TechWorldAPI.Model.UserProfileModel
         public string? PhoneNumber { get; set; }
 
         public string? Address { get; set; }
-        public int UserModelId { get; set; }
-        public UserModel User { get; set; }
 
+        [Required]
+        public int UserModelId { get; set; }
     }
 }

@@ -33,8 +33,8 @@ export class AuthFunctionComponent {
   toggleLogin() {
     this.isLogin = !this.isLogin;
   }
- 
-  
+
+
   passwordMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;

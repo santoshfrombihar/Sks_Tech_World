@@ -1,4 +1,5 @@
-﻿using TechWorldAPI.Model.UserProfileModel;
+﻿using TechWorldAPI.Model.CourseModel;
+using TechWorldAPI.Model.UserProfileModel;
 
 namespace TechWorldAPI.Model.AuthModel
 {
@@ -14,9 +15,9 @@ namespace TechWorldAPI.Model.AuthModel
 
         public string? Password { get; set; }
 
-        public int? UserProfileId { get; set; }
-
         public UserProfile? UserProfile { get; set; }
+
+        public List<Courses>? Courses { get; set; }
 
     }
 }
