@@ -7,6 +7,7 @@ using TechWorldAPI.Mappings;
 using TechWorldAPI.Model.AppDbContext;
 using TechWorldAPI.Services.AuthService.Implementation;
 using TechWorldAPI.Services.AuthService.Interfaces;
+using TechWorldAPI.Services.MailService;
 
 namespace TechWorldAPI
 {
@@ -52,6 +53,7 @@ namespace TechWorldAPI
                     });
             });
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddSingleton<MailService>();
             var app = builder.Build();
             app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
