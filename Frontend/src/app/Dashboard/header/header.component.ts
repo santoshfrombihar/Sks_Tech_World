@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '../sidebar/sidebar.component';
-import { ClassesComponent } from '../classes/classes.component';
 import { TokenService } from '../../services/token/token.service';
+import { AuthServiceService } from '../../services/auth/auth-service.service';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-header',
-  imports: [SidebarComponent, ClassesComponent],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -12,10 +14,15 @@ export class HeaderComponent {
   userName: string | null = null;
   userEmail: string | null = null;
 
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService, private authService: AuthServiceService) {}
 
   ngOnInit(): void {
     this.userName = this.tokenService.getUserName();
     this.userEmail = this.tokenService.getUserEmail();
   }
+
+  logout(){
+    this.authService.logout();
+  }
+
 }

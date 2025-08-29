@@ -14,9 +14,8 @@ import { Router } from '@angular/router';
   imports: [CommonModule, ReactiveFormsModule, ToastModule, ButtonModule],
   providers: [MessageService],
   templateUrl: './auth-function.component.html',
-  styleUrl: './auth-function.component.css'
+  styleUrls: ['./auth-function.component.css']
 })
-
 export class AuthFunctionComponent {
   isLogin: boolean = true;
   isPasswordMisMatch: boolean = false;
@@ -34,6 +33,7 @@ export class AuthFunctionComponent {
   toggleLogin() {
     this.isLogin = !this.isLogin;
   }
+
 
   passwordMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
     const password = form.get('password')?.value;
@@ -54,6 +54,7 @@ export class AuthFunctionComponent {
       this.authService.login(userLogin).subscribe(response => {
         console.log('Login Successful:', response);
         sessionStorage.setItem('authToken', response.token);
+        this.authService.authStatusSubject.next(true);
         this.redirectToHome();
       }, error => {
         this.showLoginFailed();

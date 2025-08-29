@@ -1,14 +1,24 @@
 import { Routes } from '@angular/router';
 import { AuthFunctionComponent } from './auth-function/auth-function.component';
 import { HeaderComponent } from './Dashboard/header/header.component';
-
+import { ProfileComponent } from './Dashboard/profile/profile.component';
+import { ClassesComponent } from './Dashboard/classes/classes.component';
+import { CourseContentComponent } from './Dashboard/course-content/course-content.component';
 export const routes: Routes = [
     {
-        path: '' ,
+        path: '',
         component: AuthFunctionComponent
     },
     {
         path: 'home',
-        component: HeaderComponent
+        component: ClassesComponent
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent
+    },
+    {
+        path: 'coursepage',
+        component: CourseContentComponent
     }
 ];

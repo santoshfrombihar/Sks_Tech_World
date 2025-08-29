@@ -1,0 +1,18 @@
+<div class="row g-4 mt-5">
+    <div class="col-md-12">
+        <h1>Welcome to Your Course</h1>
+    </div>
+    <div class="col-md-12">
+        Course Details
+    </div>
+    <ul class="list-disc pl-5">
+        <li *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+            {{ user }}
+        </li>
+    </ul>
+
+    <div class="mt-4">
+        <pagination-controls (pageChange)="page = $event" previousLabel="Prev" nextLabel="Next">
+        </pagination-controls>
+    </div>
+</div>
