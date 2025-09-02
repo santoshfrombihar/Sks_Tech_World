@@ -9,36 +9,58 @@
         </div>
 
         <!-- Last Name (Only for Registration) -->
-        <div class="form-group" *ngIf="!isLogin">
+        <div class="form-group" *ngIf="!isLogin && authForm.value.firstName">
             <label for="lastName">Last Name <span class="required">*</span></label>
             <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
         </div>
 
         <!-- Email Address -->
-        <div class="form-group">
+        <div class="form-group" *ngIf="!isLogin && authForm.value.lastName">
             <label for="email">Email address <span class="required">*</span></label>
             <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
         </div>
 
+        <div class="form-group" *ngIf="isLogin">
+            <label for="email">Email address <span class="required">*</span></label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
+        </div>
+
+        <!--OTP-->
+        <diV class="form-group" *ngIf="!isLogin  && isOtpSend && !isOtpVerified">
+            <p class="text-danger">{{otptext}}</p>
+            <label for="otp">OTP <span class="required">*</span></label>
+            <input type="text" class="form-control" id="otp" formControlName="otp" placeholder="OTP">
+        </diV>
+
         <!-- Password -->
-        <div class="form-group">
+        <div class="form-group" *ngIf="!isLogin && isOtpVerified">
+            <label for="password">Password <span class="required">*</span></label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+        </div>
+
+         <div class="form-group" *ngIf="isLogin">
             <label for="password">Password <span class="required">*</span></label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
         </div>
 
         <!-- Confirm Password (Only for Registration) -->
-        <div class="form-group" *ngIf="!isLogin">
+        <div class="form-group" *ngIf="!isLogin && authForm.value.password">
             <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
             <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
                 placeholder="Confirm Password">
         </div>
 
-        <p *ngIf="authForm.errors?.['passwordMismatch'] && !isLogin">
+        <p *ngIf="authForm.errors?.['passwordMismatch'] && !isLogin && authForm.value.confirmPassword">
             ❌ Passwords do not match!
         </p>
+        <button class="btn btn-primary btn-block" *ngIf="authForm.value.email && !isOtpSend"
+            (click)="sendOtp()">{{otpButtonText}}</button>
+    
+        <button class="btn btn-primary btn-block" *ngIf="isOtpSend && !isOtpVerified"
+            (click)="verifyOtp()">Verify otp</button>
 
         <!-- Submit Button -->
-        <button type="submit" [disabled]="authForm.invalid && !isLogin" class="btn btn-primary btn-block">
+        <button type="submit" [hidden]="authForm.invalid && !isLogin" class="btn btn-primary btn-block">
             {{ isLogin ? 'Login' : 'Register' }}
         </button>
 

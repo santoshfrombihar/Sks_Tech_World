@@ -1,5 +1,5 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UserRegistration } from '../../Models/AuthModel/authModel';
 import { UserLogin } from '../../Models/AuthModel/authModel';
@@ -7,7 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
-  
+
 })
 export class AuthServiceService {
   public authStatusSubject: BehaviorSubject<boolean>;
@@ -30,10 +30,33 @@ export class AuthServiceService {
     return this.http.post<UserLogin>(`${this.apiUrl}/login`, user);
   }
 
+  sendOtp(email: any): Observable<any> {
+    return this.http.post<any>(
+      'https://localhost:7068/api/Mail/send-otp',
+      {},
+      {
+        params: { email: email }
+      }
+    );
+  }
+
+  verifyOtp(email: any, otp: any): Observable<any> {
+    return this.http.post<any>(
+      'https://localhost:7068/api/Mail/verify-otp',
+      {},
+      {
+        params: {
+          email: email,
+          otp: otp
+        }
+      }
+    );
+  }
+
   loginData(userLogin: UserLogin) {
     // Perform login logic and on success:
     if (isPlatformBrowser(this.platformId)) {
-     
+
     }
     this.authStatusSubject.next(true);
   }
