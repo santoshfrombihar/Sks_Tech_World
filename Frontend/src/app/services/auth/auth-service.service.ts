@@ -60,12 +60,12 @@ export class AuthServiceService {
     }
     this.authStatusSubject.next(true);
   }
-
+  
   logout() {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem('authToken');
     }
     this.authStatusSubject.next(false);
-    this.router.navigate(['']);
+    this.router.navigate(['']); // Redirect to login
   }
 }

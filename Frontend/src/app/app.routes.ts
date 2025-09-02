@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { AuthFunctionComponent } from './auth-function/auth-function.component';
-import { HeaderComponent } from './Dashboard/header/header.component';
 import { ProfileComponent } from './Dashboard/profile/profile.component';
 import { ClassesComponent } from './Dashboard/classes/classes.component';
 import { CourseContentComponent } from './Dashboard/course-content/course-content.component';
+import { AuthGuard } from './services/auth/auth.guard';
+
 export const routes: Routes = [
     {
         path: '',
@@ -11,14 +12,14 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: ClassesComponent
+        component: ClassesComponent, canActivate: [AuthGuard]
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent, canActivate: [AuthGuard]
     },
     {
         path: 'coursepage',
-        component: CourseContentComponent
+        component: CourseContentComponent, canActivate: [AuthGuard]
     }
 ];
