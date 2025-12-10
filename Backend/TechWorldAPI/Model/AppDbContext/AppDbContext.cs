@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using TechWorldAPI.Model.AuthModel;
+using TechWorldAPI.Model.CourseContent;
 using TechWorldAPI.Model.UserProfileModel;
 
 namespace TechWorldAPI.Model.AppDbContext
@@ -15,6 +16,8 @@ namespace TechWorldAPI.Model.AppDbContext
         public DbSet<UserModel> Users { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public DbSet<CourseContentModel> CourseContent { get; set; }
 
         
     }
