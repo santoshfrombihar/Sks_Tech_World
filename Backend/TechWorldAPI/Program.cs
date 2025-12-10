@@ -1,76 +1,15 @@
+using TechWorldAPI;
 
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using TechWorldAPI.Mappings;
-using TechWorldAPI.Model.AppDbContext;
-using TechWorldAPI.Services.AuthService.Implementation;
-using TechWorldAPI.Services.AuthService.Interfaces;
-using TechWorldAPI.Services.MailService;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace TechWorldAPI
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+// Use Startup.cs
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services);
 
-            // Add services to the container.
+// IMPORTANT: this must run in Lambda, not only DEBUG
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
-            builder.Services.AddControllers();
-            builder.Services.AddAutoMapper(typeof(MappingProfile));
-            builder.Services.AddDbContext<AppDbContext>(options =>
-             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-            );
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = "localhost", 
-                    ValidAudience = "postmanClient", 
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyVerySecureAndStrongJWTKey123456!")) 
-                };
-            });
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll",
-                    policy =>
-                    {
-                        policy.AllowAnyOrigin()
-                              .AllowAnyMethod()
-                              .AllowAnyHeader();
-                    });
-            });
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddSingleton<MailService>();
-            var app = builder.Build();
-            app.UseCors("AllowAll");
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+var app = builder.Build();
+startup.Configure(app);
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
-        }
-    }
-}
+app.Run();
