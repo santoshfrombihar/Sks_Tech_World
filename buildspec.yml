@@ -10,15 +10,15 @@ phases:
   pre_build:
     commands:
       - echo Installing frontend dependencies
-      - cd frontend
+      - cd Frontend
       - npm install
   build:
     commands:
       - echo Building Angular frontend
-      - cd frontend
+      - cd Frontend
       - ng build --configuration production
 
 artifacts:
   files:
     - '**/*'
-  base-directory: frontend/dist
+  base-directory: Frontend/dist
