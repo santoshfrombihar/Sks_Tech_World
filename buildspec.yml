@@ -15,7 +15,6 @@ phases:
   build:
     commands:
       - echo Building Angular frontend
-      - cd Frontend
       - ng build --configuration production
 
 artifacts:
