@@ -9,6 +9,8 @@ using TechWorldAPI.Mappings;
 using TechWorldAPI.Model.AppDbContext;
 using TechWorldAPI.Services.AuthService.Implementation;
 using TechWorldAPI.Services.AuthService.Interfaces;
+using TechWorldAPI.Services.CourseService.Implementation;
+using TechWorldAPI.Services.CourseService.Interfaces;
 using TechWorldAPI.Services.MailService;
 
 namespace TechWorldAPI
@@ -62,6 +64,7 @@ namespace TechWorldAPI
             // DI services
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton<MailService>();
+            services.AddScoped<ICourseHandler, CourseHandler>();
 
             // Swagger
             services.AddEndpointsApiExplorer();
