@@ -2,19 +2,23 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 20   # choose your Node version
     commands:
-      - cd Frontend
+      - echo Installing Angular CLI
       - npm install -g @angular/cli
   pre_build:
     commands:
-      - cd Frontend
+      - echo Installing frontend dependencies
+      - cd frontend
       - npm install
   build:
     commands:
-      - cd Frontend
+      - echo Building Angular frontend
+      - cd frontend
       - ng build --configuration production
 
 artifacts:
   files:
     - '**/*'
-  base-directory: Frontend/dist
+  base-directory: frontend/dist
