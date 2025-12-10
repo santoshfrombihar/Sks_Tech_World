@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - cd Frontend
+      - npm install -g @angular/cli
+  pre_build:
+    commands:
+      - cd Frontend
+      - npm install
+  build:
+    commands:
+      - cd Frontend
+      - ng build --configuration production
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: Frontend/dist
