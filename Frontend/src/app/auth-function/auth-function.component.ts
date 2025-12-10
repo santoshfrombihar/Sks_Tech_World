@@ -8,6 +8,9 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { response } from 'express';
+import { error } from 'console';
+
 
 @Component({
   selector: 'app-auth-function',
@@ -19,21 +22,28 @@ import { Router } from '@angular/router';
 export class AuthFunctionComponent {
   isLogin: boolean = true;
   isPasswordMisMatch: boolean = false;
-
+  isOtpSend: boolean = false;
+  otptext: any = "Check you mail for OTP";
+  otpButtonText: any = "Send OTP";
+  isEmailVerified: boolean = false;
+  isOtpVerified = false;
   constructor(private authService: AuthServiceService, private messageService: MessageService, private router: Router) { }
+
+
 
   authForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-    confirmPassword: new FormControl('', Validators.required)
+    confirmPassword: new FormControl('', Validators.required),
+    otp: new FormControl('',Validators.required)
+    
   }, { validators: this.passwordMatchValidator })
 
   toggleLogin() {
     this.isLogin = !this.isLogin;
   }
-
 
   passwordMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
     const password = form.get('password')?.value;
@@ -76,6 +86,27 @@ export class AuthFunctionComponent {
     }
   }
 
+
+  sendOtp() {
+    this.authService.sendOtp(this.authForm.value.email).subscribe(response => {
+      this.isOtpSend = true;
+      console.log(this.isOtpSend);
+    }, error => {
+      this.otptext = "not able to send otp try again";
+      this.otpButtonText = "Re-Send OTP";
+    });
+  }
+  
+  verifyOtp(){
+    this.authService.verifyOtp(this.authForm.value.email,this.authForm.value.otp).subscribe(response =>{
+       this.isOtpVerified = true;
+    }, error =>{
+       this.isOtpVerified = false;
+       this.otptext = "You have entered wrong Otp please check again";
+    })
+
+  }
+
   showLoginFailed() {
     this.messageService.add({
       severity: 'error',
@@ -95,4 +126,10 @@ export class AuthFunctionComponent {
   redirectToHome() {
     this.router.navigate(['/home']); // Navigate to the 'home' route
   }
+
+  isEmailInvalid(): boolean {
+    const email = this.authForm.get('email');
+    return !!(email && email.invalid && (email.dirty || email.touched));
+  }
+
 }

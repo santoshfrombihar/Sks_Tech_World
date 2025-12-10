@@ -1,0 +1,32 @@
+﻿{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Transform": "AWS::Serverless-2016-10-31",
+    "Description": "TechWorldAPI Lambda Deployment",
+    "Resources": {
+        "TechWorldApiFunction": {
+            "Type": "AWS::Serverless::Function",
+            "Properties": {
+                "Handler": "TechWorldAPI::TechWorldAPI.LamdaEntry::FunctionHandlerAsync",
+                "Runtime": "dotnet8",
+                "MemorySize": 512,
+                "Timeout": 30,
+                "PackageType": "Zip",
+                "Events": {
+                    "Api": {
+                        "Type": "HttpApi",
+                        "Properties": {
+                            "Path": "/{proxy+}",
+                            "Method": "ANY"
+                        }
+                    }
+                },
+                "Environment": {
+                    "Variables": {
+                        "ASPNETCORE_ENVIRONMENT": "Production",
+                        "DefaultConnection": "Host=ep-bitter-dew-a70or9ut-pooler.ap-southeast-2.aws.neon.tech;Port=5432;Database=neondb;Username=neondb_owner;Password=npg_6UHPFNEDw1BL;SSL Mode=Require;Trust Server Certificate=true"
+                    }
+                }
+            }
+        }
+    }
+}
