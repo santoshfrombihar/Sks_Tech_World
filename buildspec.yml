@@ -18,10 +18,8 @@ phases:
 
   post_build:
     commands:
-      - cd dist/sks-tech-world/browser
-      - echo "Going to Folder"
       - echo "Uploading to S3..."
-      - aws s3 sync dist/ s3://tech-world-frontend/ --delete
+      - aws s3 sync dist/sks-tech-world/browser s3://tech-world-frontend/ --delete
       - echo "Invalidating CloudFront..."
       - aws cloudfront create-invalidation --distribution-id E3FTJDQOOT2OHZ --paths "/*"
 
