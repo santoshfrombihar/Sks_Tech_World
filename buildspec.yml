@@ -3,21 +3,28 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 20   # choose your Node version
+      nodejs: 20
     commands:
       - echo Installing Angular CLI
       - npm install -g @angular/cli
+
   pre_build:
     commands:
       - echo Installing frontend dependencies
       - cd Frontend
       - npm install
+
   build:
     commands:
       - echo Building Angular frontend
       - ng build --configuration production
+
   post_build:
     commands:
+      - cd ..
+      - echo Uploading build to S3 bucket....
+      - aws s3 sync Frontend/dist s3://tech-world-frontend/ --delete
+      - echo Creating CloudFront invalidation....
       - aws cloudfront create-invalidation --distribution-id E3FTJDQOOT2OHZ --paths "/*"
 
 artifacts:
