@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+    commands:
+      - echo Restoring packages...
+      - cd Backend
+      - dotnet restore
+
+  build:
+    commands:
+      - echo Building Lambda function...
+      - dotnet lambda package --configuration Release --framework net8.0 --output-package ../deployment.zip
+
+artifacts:
+  files:
+    - deployment.zip
