@@ -2,17 +2,26 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 20
     commands:
-      - cd Frontend
       - npm install -g @angular/cli
+
   pre_build:
     commands:
       - cd Frontend
       - npm install
+
   build:
     commands:
-      - cd Frontend
       - ng build --configuration production
+
+  post_build:
+    commands:
+      - echo "Uploading to S3..."
+      - aws s3 sync dist/sks-tech-world/browser s3://tech-world-frontend/ --delete
+      - echo "Invalidating CloudFront..."
+      - aws cloudfront create-invalidation --distribution-id E3FTJDQOOT2OHZ --paths "/*"
 
 artifacts:
   files:
