@@ -5,15 +5,18 @@ phases:
     runtime-versions:
       dotnet: 8.0
     commands:
+      - echo Installing Amazon Lambda Tools...
+      - dotnet tool install -g Amazon.Lambda.Tools
+      - export PATH="$PATH:/root/.dotnet/tools"
       - echo Restoring packages...
       - cd Backend/TechWorldAPI
       - dotnet restore
 
   build:
     commands:
-      - echo Building Lambda function...
+      - echo Building and packaging Lambda...
       - dotnet lambda package --configuration Release --framework net8.0 --output-package ../deployment.zip
 
 artifacts:
   files:
-    - deployment.zip
+    - Backend/deployment.zip
