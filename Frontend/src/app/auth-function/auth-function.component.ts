@@ -8,13 +8,14 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { response } from 'express';
 import { error } from 'console';
 
 
 @Component({
   selector: 'app-auth-function',
-  imports: [CommonModule, ReactiveFormsModule, ToastModule, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, ToastModule, ButtonModule, ProgressSpinnerModule],
   providers: [MessageService],
   templateUrl: './auth-function.component.html',
   styleUrls: ['./auth-function.component.css']
@@ -27,6 +28,7 @@ export class AuthFunctionComponent {
   otpButtonText: any = "Send OTP";
   isEmailVerified: boolean = false;
   isOtpVerified = false;
+  loderStart = false;
   constructor(private authService: AuthServiceService, private messageService: MessageService, private router: Router) { }
 
 
@@ -52,6 +54,7 @@ export class AuthFunctionComponent {
   }
 
   onSubmit() {
+    this.loderStart = true;
     if (this.authForm.invalid && !this.isLogin) {
       return;
     }
@@ -65,10 +68,12 @@ export class AuthFunctionComponent {
         console.log('Login Successful:', response);
         sessionStorage.setItem('authToken', response.token);
         this.authService.authStatusSubject.next(true);
+        this.loderStart = false;
         this.redirectToHome();
       }, error => {
         this.showLoginFailed();
         console.error('Login Failed:', error);
+        this.loderStart = false;
       });
     } else {
       const userRegistration: UserRegistration = {
@@ -79,9 +84,14 @@ export class AuthFunctionComponent {
       }
       this.authService.register(userRegistration).subscribe(response => {
         console.log('Registration Successful:', response);
+        this.loderStart = false;
+        this.showRegistrationSuccess();
+        this.isLogin = true;
+
       }, error => {
         this.showRegistrationFailed();
         console.error('Registration Failed:', error);
+        this.loderStart = false;
       });
     }
   }
@@ -91,7 +101,11 @@ export class AuthFunctionComponent {
     this.authService.sendOtp(this.authForm.value.email).subscribe(response => {
       this.isOtpSend = true;
       console.log(this.isOtpSend);
+      this.loderStart = false;
     }, error => {
+      this.showRegistrationFailed();
+      this.loderStart = false;
+      this.isLogin = true;
       this.otptext = "not able to send otp try again";
       this.otpButtonText = "Re-Send OTP";
     });
@@ -100,11 +114,29 @@ export class AuthFunctionComponent {
   verifyOtp(){
     this.authService.verifyOtp(this.authForm.value.email,this.authForm.value.otp).subscribe(response =>{
        this.isOtpVerified = true;
+       this.loderStart = false;
+       this.showOTPVarified();
     }, error =>{
        this.isOtpVerified = false;
+       this.loderStart = false;
        this.otptext = "You have entered wrong Otp please check again";
     })
 
+  }
+
+  showOTPVarified() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'OTP Verified',
+    });
+  }
+   
+   showRegistrationSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Registration Success',
+      detail: 'Returning to Login Page'
+    });
   }
 
   showLoginFailed() {

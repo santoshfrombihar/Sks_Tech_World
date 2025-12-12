@@ -20,6 +20,8 @@
     "@angular/platform-server": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@angular/ssr": "^19.1.2",
+    "@ngneat/overview": "6.1.1",
+    "@ngxpert/hot-toast": "^4.2.0",
     "@primeng/themes": "^19.0.5",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",

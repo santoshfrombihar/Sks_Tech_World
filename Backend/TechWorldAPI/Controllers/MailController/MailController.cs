@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Concurrent;
+using TechWorldAPI.Model.AppDbContext;
 using TechWorldAPI.Services.MailService;
 
 namespace TechWorldAPI.Controllers.MailController
@@ -10,25 +12,36 @@ namespace TechWorldAPI.Controllers.MailController
     public class MailController : ControllerBase
     {
         private readonly MailService _emailService;
+        private readonly AppDbContext _appDbContext;
         private static ConcurrentDictionary<string, (string Otp, DateTime Expiry)> otpStorage
             = new ConcurrentDictionary<string, (string, DateTime)>();
 
-        public MailController(MailService emailService)
+        public MailController(MailService emailService, AppDbContext appDbContext)
         {
             _emailService = emailService;
+            _appDbContext = appDbContext;
         }
 
         [HttpPost("send-otp")]
         public IActionResult SendOtp([FromQuery] string email)
         {
-            var otp = new Random().Next(100000, 999999).ToString();
-            var expiry = DateTime.Now.AddMinutes(5);
+            var existingUser = _appDbContext.Users.FirstOrDefault(u => u.Email == email);
+            if(existingUser == null)
+            {
+                var otp = new Random().Next(100000, 999999).ToString();
+                var expiry = DateTime.Now.AddMinutes(5);
 
-            otpStorage[email] = (otp, expiry);
+                otpStorage[email] = (otp, expiry);
 
-            _emailService.SendEmail(email, "Your OTP Code", $"Your OTP is: {otp}");
+                _emailService.SendEmail(email, "Your OTP Code", $"Your OTP is: {otp}");
 
-            return Ok(new { Message = "OTP sent to email" });
+                return Ok(new { Message = "OTP sent to email" });
+            }
+            else
+            {
+                return Conflict(new { userExists = "true" , message = "User with this email already exists." });
+            }
+          
         }
 
         [HttpPost("verify-otp")]

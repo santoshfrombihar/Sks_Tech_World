@@ -5,6 +5,8 @@ import { UserRegistration } from '../../Models/AuthModel/authModel';
 import { UserLogin } from '../../Models/AuthModel/authModel';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../enviroment';
+
 @Injectable({
   providedIn: 'root'
 
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 export class AuthServiceService {
   public authStatusSubject: BehaviorSubject<boolean>;
   authStatus: Observable<boolean>;
-  private apiUrl = 'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/Auth';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
     const isLoggedIn = isPlatformBrowser(this.platformId) ? !!sessionStorage.getItem('authToken') : false;
@@ -22,17 +24,17 @@ export class AuthServiceService {
 
   // Register user
   register(user: UserRegistration): Observable<UserRegistration> {
-    return this.http.post<UserRegistration>(`${this.apiUrl}/register`, user);
+    return this.http.post<UserRegistration>(`${this.apiUrl}/api/Auth/register`, user);
   }
 
   // Login user
   login(user: UserLogin): Observable<any> {
-    return this.http.post<UserLogin>(`${this.apiUrl}/login`, user);
+    return this.http.post<UserLogin>(`${this.apiUrl}/api/Auth/login`, user);
   }
 
   sendOtp(email: any): Observable<any> {
     return this.http.post<any>(
-      'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/Mail/send-otp',
+      `${this.apiUrl}/api/Mail/send-otp`,
       {},
       {
         params: { email: email }
@@ -42,7 +44,7 @@ export class AuthServiceService {
 
   verifyOtp(email: any, otp: any): Observable<any> {
     return this.http.post<any>(
-      'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/Mail/verify-otp',
+      `${this.apiUrl}/api/Mail/verify-otp`,
       {},
       {
         params: {
