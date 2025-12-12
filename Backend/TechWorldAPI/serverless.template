@@ -11,7 +11,7 @@
                 "MemorySize": 512,
                 "Timeout": 30,
                 "PackageType": "Zip",
-                "CodeUri": "deployment.zip",
+                "CodeUri": "s3://tech-world-backend-artifacts/deployment.zip",
                 "Events": {
                     "Api": {
                         "Type": "HttpApi",
