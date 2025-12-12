@@ -11,6 +11,7 @@
                 "MemorySize": 512,
                 "Timeout": 30,
                 "PackageType": "Zip",
+                "CodeUri": "Backend/TechWorldAPI/publish/",
                 "Events": {
                     "Api": {
                         "Type": "HttpApi",
