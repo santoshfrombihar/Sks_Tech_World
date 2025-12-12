@@ -10,7 +10,7 @@ export class UserprofileService {
 
   constructor(private http: HttpClient) { }
 
-  private url = 'https://localhost:7068/api/User';
+  private url = 'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/User';
 
   CreateUserProfile(userData: UserProfile): Observable<UserProfile> {
     return this.http.post<UserProfile>(`${this.url}/userProfile`, userData);

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class AuthServiceService {
   public authStatusSubject: BehaviorSubject<boolean>;
   authStatus: Observable<boolean>;
-  private apiUrl = 'https://localhost:7068/api/Auth';
+  private apiUrl = 'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/Auth';
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
     const isLoggedIn = isPlatformBrowser(this.platformId) ? !!sessionStorage.getItem('authToken') : false;
@@ -32,7 +32,7 @@ export class AuthServiceService {
 
   sendOtp(email: any): Observable<any> {
     return this.http.post<any>(
-      'https://localhost:7068/api/Mail/send-otp',
+      'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/Mail/send-otp',
       {},
       {
         params: { email: email }
@@ -42,7 +42,7 @@ export class AuthServiceService {
 
   verifyOtp(email: any, otp: any): Observable<any> {
     return this.http.post<any>(
-      'https://localhost:7068/api/Mail/verify-otp',
+      'https://uimxm2qccf.execute-api.ap-south-1.amazonaws.com/api/Mail/verify-otp',
       {},
       {
         params: {
