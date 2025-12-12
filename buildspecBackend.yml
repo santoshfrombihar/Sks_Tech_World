@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       dotnet: 8.0
     commands:
-      - echo Installing Amazon Lambda Tools...
+      - echo Installing Lambda Tools
       - dotnet tool install -g Amazon.Lambda.Tools
       - export PATH="$PATH:/root/.dotnet/tools"
       - cd Backend/TechWorldAPI
@@ -13,11 +13,10 @@ phases:
 
   build:
     commands:
-      - echo Packaging Lambda function...
-      - dotnet lambda package --configuration Release --framework net8.0 --output-package ../deployment.zip
+      - echo Packaging Lambda...
+      - dotnet lambda package --configuration Release --framework net8.0 --output-package deployment.zip
+      - aws s3 cp deployment.zip s3://tech-world-backend-artifacts/deployment.zip
 
 artifacts:
   files:
-    - Backend/deployment.zip
-    - Backend/TechWorldAPI/serverless.template  
-  name: BuildArtifact
+    - Backend/TechWorldAPI/serverless.template
