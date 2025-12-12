@@ -15,7 +15,7 @@ phases:
     commands:
       - echo Packaging Lambda...
       - dotnet lambda package --configuration Release --framework net8.0 --output-package deployment.zip
-      - aws s3 cp deployment.zip s3://tech-world-backend-artifacts/deployment.zip
+      - aws s3 cp deployment.zip s3://techworld-backend-artifacts/deployment.zip
 
 artifacts:
   files:
