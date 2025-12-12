@@ -8,15 +8,16 @@ phases:
       - echo Installing Amazon Lambda Tools...
       - dotnet tool install -g Amazon.Lambda.Tools
       - export PATH="$PATH:/root/.dotnet/tools"
-      - echo Restoring packages...
       - cd Backend/TechWorldAPI
       - dotnet restore
 
   build:
     commands:
-      - echo Building and packaging Lambda...
+      - echo Packaging Lambda function...
       - dotnet lambda package --configuration Release --framework net8.0 --output-package ../deployment.zip
 
 artifacts:
   files:
     - Backend/deployment.zip
+    - Backend/TechWorldAPI/serverless.template  
+  name: BuildArtifact
