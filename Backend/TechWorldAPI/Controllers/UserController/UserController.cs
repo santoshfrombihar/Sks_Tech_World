@@ -58,5 +58,25 @@ namespace TechWorldAPI.Controllers.UserController
 
             return Ok(userProfile);
         }
+
+        [HttpPost("verifyadminkey")]
+        public IActionResult VerifyKey([FromBody] string key)
+        {
+            if(key != null)
+            {
+                if(key == "A9fQ#2mX!7Lk@R")
+                {
+                    return Ok(new { Status = "verified" });
+                }
+                else
+                {
+                    return NotFound(new { Status = "key not match" });
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

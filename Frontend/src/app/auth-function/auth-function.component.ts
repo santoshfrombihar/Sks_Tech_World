@@ -7,7 +7,7 @@ import { AuthServiceService } from '../services/auth/auth-service.service';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { response } from 'express';
 import { error } from 'console';
@@ -39,8 +39,8 @@ export class AuthFunctionComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
     confirmPassword: new FormControl('', Validators.required),
-    otp: new FormControl('',Validators.required)
-    
+    otp: new FormControl('', Validators.required)
+
   }, { validators: this.passwordMatchValidator })
 
   toggleLogin() {
@@ -110,16 +110,16 @@ export class AuthFunctionComponent {
       this.otpButtonText = "Re-Send OTP";
     });
   }
-  
-  verifyOtp(){
-    this.authService.verifyOtp(this.authForm.value.email,this.authForm.value.otp).subscribe(response =>{
-       this.isOtpVerified = true;
-       this.loderStart = false;
-       this.showOTPVarified();
-    }, error =>{
-       this.isOtpVerified = false;
-       this.loderStart = false;
-       this.otptext = "You have entered wrong Otp please check again";
+
+  verifyOtp() {
+    this.authService.verifyOtp(this.authForm.value.email, this.authForm.value.otp).subscribe(response => {
+      this.isOtpVerified = true;
+      this.loderStart = false;
+      this.showOTPVarified();
+    }, error => {
+      this.isOtpVerified = false;
+      this.loderStart = false;
+      this.otptext = "You have entered wrong Otp please check again";
     })
 
   }
@@ -130,8 +130,8 @@ export class AuthFunctionComponent {
       summary: 'OTP Verified',
     });
   }
-   
-   showRegistrationSuccess() {
+
+  showRegistrationSuccess() {
     this.messageService.add({
       severity: 'success',
       summary: 'Registration Success',
@@ -159,6 +159,9 @@ export class AuthFunctionComponent {
     this.router.navigate(['/home']); // Navigate to the 'home' route
   }
 
+  gotoAdminLogin() {
+    this.router.navigate(['/adminlogin']);
+  }
   isEmailInvalid(): boolean {
     const email = this.authForm.get('email');
     return !!(email && email.invalid && (email.dirty || email.touched));

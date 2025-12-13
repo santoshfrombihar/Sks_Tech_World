@@ -24,9 +24,9 @@ namespace TechWorldAPI.Controllers.AuthController
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel login)
+        public async Task<IActionResult> Login([FromBody] LoginModel login)
         {
-            UserSignupDto user  =  _userService.GetUserByEmail(login.Email).Result;
+                UserSignupDto user  = await _userService.GetUserByEmail(login.Email);
             if (user != null)
             {
                 if (login.Email == user.Email && login.Password == user.Password)

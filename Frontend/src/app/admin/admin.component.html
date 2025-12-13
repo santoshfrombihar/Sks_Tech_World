@@ -1,0 +1,72 @@
+<!-- ADMIN KEY VERIFY -->
+<div *ngIf="!isVerified" class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm p-4" style="max-width: 380px; width: 100%;">
+        <h5 class="text-center mb-3 fw-semibold">Verify Your Identity</h5>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" [(ngModel)]="adminKey"
+                placeholder="Please Enter Your Admin Key here ..........." />
+        </div>
+
+        <div *ngIf="loderStart" class="text-center">
+            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".50s"
+                [style]="{ width: '50px', height: '50px' }">
+            </p-progress-spinner>
+        </div>
+
+        <p *ngIf="setErrorText" class="text-danger">
+            Admin Key not match, Please contact support to get Admin key
+        </p>
+
+        <button type="button" class="btn btn-primary w-100" (click)="verifyAdminKey()">
+            Verify
+        </button>
+    </div>
+</div>
+
+<!-- FORM -->
+<div *ngIf="isVerified" class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm p-4" style="max-width: 500px; width: 100%;">
+
+        <form [formGroup]="adminForm">
+            <div *ngIf="!addNewClicked" class="form-group text-center mb-3">
+                <button type="button" class="btn btn-primary" (click)="addNewData()">Add New Course</button>
+                <button type="button" class="btn btn-primary ms-3">Update Course</button>
+            </div>
+            <div *ngIf="addNewClicked">
+                <div class="form-group">
+                    <label>Field</label>
+                    <select class="form-control" formControlName="selectedField" (change)="onFieldChange()">
+                        <option value="">-- Select Field --</option>
+                        <option *ngFor="let field of fields" [value]="field">
+                            {{ field }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Course</label>
+                    <select class="form-control" formControlName="selectedCourse" [disabled]="courses.length === 0">
+                        <option value="">-- Select Course --</option>
+                        <option *ngFor="let course of courses" [value]="course">
+                            {{ course }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Course Description</label>
+                    <textarea id="description" class="form-control" rows="4" maxlength="250" formControlName="codedesc"
+                        placeholder="Enter description here..." (input)="onDescInput($event)"></textarea>
+                    <p [ngClass]="{
+                                    'text-danger': count != undefined && count <= 50,
+                                    'text-success': count != undefined && count > 0
+                                }">
+                        {{ count }}
+                    </p>
+                </div>
+                <button type="button" class="btn btn-primary">Add Course</button>
+            </div>
+        </form>
+    </div>
+</div>
