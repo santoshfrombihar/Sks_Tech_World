@@ -1,3 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+    overflow: hidden; /* Prevent main page scrolling */
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -7,4 +13,5 @@ body {
     position: relative;
     opacity: 1.0;
     z-index: -1;
+    overflow: hidden; /* Prevent main page scrolling */
 }

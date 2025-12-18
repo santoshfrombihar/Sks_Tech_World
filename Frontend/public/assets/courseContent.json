@@ -1,11 +1,11 @@
 [
     {
         "id": 1,
-        "content": "FirstPage"
+        "content": "Getting Started with C#"
     },
     {
         "id": 2,
-        "content": "SecondPage"
+        "content": "Enviroment Setup"
     },
     {
         "id": 3,

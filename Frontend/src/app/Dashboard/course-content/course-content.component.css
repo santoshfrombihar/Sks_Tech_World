@@ -1,0 +1,111 @@
+.list-group-item {
+  font-size: 15px;
+}
+
+.border {
+  background: #fafafa;
+}
+
+/* Full page container for scrolling */
+.full-page-container {
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Scrollable content for progress tracking */
+.scrollable-content {
+  min-height: 100vh; /* Minimum full viewport height */
+  padding: 20px; /* Reduced padding for slightly more width */
+  background: #f8f9fa;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 4px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: #6c757d;
+  border-radius: 4px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: #495057;
+}
+
+/* Content sections */
+.content-section .card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-section .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.content-section .card-header {
+  border-radius: 12px 12px 0 0 !important;
+  border: none;
+}
+
+.content-section pre {
+  background: #2d3748;
+  color: #e2e8f0;
+  border-radius: 8px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Hero section gradient */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Feature icons */
+.feature-icon {
+  font-size: 3rem;
+}
+
+/* Card hover effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+/* Hero image */
+.hero-image {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Section spacing */
+.hero-section, .overview-section, .learning-section, .highlights-section, .cta-section {
+  padding: 5rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section .display-4 {
+    font-size: 2.5rem;
+  }
+  .section-spacing {
+    padding: 3rem 0;
+  }
+}

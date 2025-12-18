@@ -1,18 +1,184 @@
-<div class="row g-4 mt-5 bg-white">
-    <div class="col-md-12">
-        <h1>Welcome to Your Course</h1>
-    </div>
-    <div class="col-md-12">
-        Course Details
-    </div>
-    <ul class="list-disc pl-5">
-        <li *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
-            {{ user }}
-        </li>
-    </ul>
+<div class="full-page-container" #scrollContainer>
+  <div class="scrollable-content" *ngIf="selectedSection === 1">
 
-    <div class="mt-4">
-        <pagination-controls (pageChange)="page = $event" previousLabel="Prev" nextLabel="Next">
-        </pagination-controls>
+    <!-- HERO SECTION -->
+    <div class="hero-section bg-gradient-primary text-white py-5">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-4">
+              🚀 Master C# Programming
+            </h1>
+            <p class="lead mb-4">
+              Unlock your potential with comprehensive C# training. From basics to advanced concepts,
+              build real-world applications with confidence.
+            </p>
+          </div>
+          <div class="col-lg-6 text-center">
+            <img src="/images/c-sharp.png" alt="C# Logo" class="img-fluid hero-image" style="max-width: 300px;">
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- COURSE OVERVIEW -->
+    <div class="overview-section py-5 bg-light">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="fw-bold text-dark">📘 Course Overview</h2>
+            <p class="text-muted lead">
+              Dive deep into C# programming with structured learning paths
+            </p>
+          </div>
+          <div class="col-md-8 mx-auto">
+            <div class="card shadow-sm border-0">
+              <div class="card-body p-4">
+                <p class="mb-0">
+                  This comprehensive course focuses exclusively on the <strong>C# programming language</strong>.
+                  You'll master syntax, object-oriented programming concepts, memory management, collections,
+                  exception handling, and advanced interview-level topics. Perfect for beginners and experienced
+                  developers looking to sharpen their C# skills.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT YOU WILL LEARN -->
+    <div class="learning-section py-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="fw-bold text-dark">🎯 What You Will Learn</h2>
+          </div>
+          <div class="col-md-10 mx-auto">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Foundation Skills</h5>
+                    <ul class="list-unstyled">
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>C# Basics & Syntax</li>
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Variables, Data Types
+                      </li>
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Conditions & Loops</li>
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Methods & Parameters
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Advanced Concepts</h5>
+                    <ul class="list-unstyled">
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>OOP (Class, Object,
+                        Inheritance)</li>
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Interface & Abstract
+                        Class</li>
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Exception Handling</li>
+                      <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Collections & LINQ
+                        Basics</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COURSE HIGHLIGHTS -->
+    <div class="highlights-section py-5 bg-light">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="fw-bold text-dark">✨ Course Highlights</h2>
+          </div>
+          <div class="col-md-10 mx-auto">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card text-center h-100 shadow-sm border-0">
+                  <div class="card-body">
+                    <div class="feature-icon mb-3">
+                      <span class="display-4">📝</span>
+                    </div>
+                    <h5 class="card-title">Interactive Quizzes</h5>
+                    <p class="card-text text-muted">
+                      Topic-wise quizzes to reinforce C# concepts and track your progress
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card text-center h-100 shadow-sm border-0">
+                  <div class="card-body">
+                    <div class="feature-icon mb-3">
+                      <span class="display-4">🎤</span>
+                    </div>
+                    <h5 class="card-title">Interview Questions</h5>
+                    <p class="card-text text-muted">
+                      Real C# interview questions with detailed answers and explanations
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card text-center h-100 shadow-sm border-0">
+                  <div class="card-body">
+                    <div class="feature-icon mb-3">
+                      <span class="display-4">🧪</span>
+                    </div>
+                    <h5 class="card-title">Mock Tests</h5>
+                    <p class="card-text text-muted">
+                      Comprehensive final mock tests to assess your C# proficiency
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Placeholder for other sections -->
+  <div class="scrollable-content" *ngIf="selectedSection !== 1">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center mb-4">Section {{ selectedSection }}</h1>
+
+        <!-- Sample content blocks to create scrollable content -->
+        <div class="content-section mb-5" *ngFor="let block of getContentBlocks(selectedSection)">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+              <h3 class="card-title mb-0">{{ block.title }}</h3>
+            </div>
+            <div class="card-body">
+              <p class="lead">{{ block.description }}</p>
+              <div *ngFor="let para of block.paragraphs" class="mb-3">
+                <p>{{ para }}</p>
+              </div>
+              <div *ngIf="block.codeExample" class="bg-light p-3 rounded">
+                <pre><code>{{ block.codeExample }}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional content to ensure scrollability -->
+        <div class="text-center mt-5">
+          <p class="text-muted">Scroll to the bottom to complete this section!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

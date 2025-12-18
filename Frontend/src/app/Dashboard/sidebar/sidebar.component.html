@@ -1,21 +1,48 @@
-<div class="d-flex flex-column bg-light vh-100 p-3" style="width: 250px;">
-    <h4>Menu </h4>
-    <ul class="nav flex-column" *ngIf="router.url === '/home'">
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/settings">Settings</a>
-        </li>
-    </ul>
-    <ul class="nav flex-column" *ngIf="router.url === '/coursepage'">
-        <div *ngFor="let courseHeader of coursesHeader">
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" [class.collapsed]="isCollapsed" style="margin-top: 2%;">
+
+        <!-- TOGGLE BUTTON (EDGE) -->
+        <button class="toggle-btn" (click)="toggleSidebar()">
+            <i class="bi" [class]="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
+        </button>
+
+        <ul class="nav flex-column" *ngIf="router.url === '/home'">
             <li class="nav-item">
-                <a class="nav-link">{{courseHeader.content}}</a>
+                <a class="nav-link">
+                    <i class="bi bi-house-door me-2"></i>
+                    <span *ngIf="!isCollapsed">Home</span>
+                </a>
             </li>
-        </div>
-    </ul>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="bi bi-person me-2"></i>
+                    <span *ngIf="!isCollapsed">Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="bi bi-gear me-2"></i>
+                    <span *ngIf="!isCollapsed">Settings</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav flex-column" *ngIf="router.url === '/coursepage'">
+            <li class="nav-item" *ngFor="let courseHeader of coursesHeader">
+                <a class="nav-link" (click)="selectSection(courseHeader.id)" [class.active]="selectedSection === courseHeader.id" [class.completed]="isCompleted(courseHeader.id)" [style.--progress]="getProgress(courseHeader.id) + '%'">
+                    <i class="bi me-2" [class]="isCompleted(courseHeader.id) ? 'bi-check-circle-fill text-success' : 'bi-circle'"></i>
+                    <span *ngIf="!isCollapsed">{{ courseHeader.content }}</span>
+                    <span *ngIf="!isCollapsed" class="progress-text">{{ getProgress(courseHeader.id) }}%</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content" [class.expanded]="isCollapsed">
+    </div>
+
 </div>
