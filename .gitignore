@@ -1,0 +1,27 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.tmp
+*.temp
+.vs/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+
+# Node.js/Angular (if needed globally, but Frontend has its own)
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+publish/
